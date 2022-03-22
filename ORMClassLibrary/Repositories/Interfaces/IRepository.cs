@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ORM.Domain.Repositories.Interfaces
 {
@@ -10,5 +11,8 @@ namespace ORM.Domain.Repositories.Interfaces
         void Update(T obj);
         void Delete(object id);
         void Save();
+        IEnumerable<T> GetAllUsingProcedure(string procedureName);
+        IEnumerable<T> GetAllWithFilter(Func<T, bool> filter);
+        int DeleteInBulkWithFilter(Func<T, bool> filter);
     }
 }

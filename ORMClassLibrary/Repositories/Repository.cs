@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ORM.Domain.Repositories.Interfaces;
 using ORMClassLibrary.Context;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,7 +25,7 @@ namespace ORM.Domain.Repositories
 
         public IEnumerable<T> GetAll()
         {
-            return table.ToList();
+            return table;
         }
         public T GetById(object id)
         {
@@ -47,6 +48,24 @@ namespace ORM.Domain.Repositories
         public void Save()
         {
             _context.SaveChanges();
+        }
+
+        public IEnumerable<T> GetAllUsingProcedure(string procedureName)
+        {
+            return table.FromSqlRaw(procedureName);
+        }
+
+        public IEnumerable<T> GetAllWithFilter(Func<T, bool> filter)
+        {
+            return table.Where(filter);
+        }
+
+        public int DeleteInBulkWithFilter(Func<T, bool> filter)
+        {
+            var entitiesToDelete = table.Where(filter);
+            int count = entitiesToDelete.Count();
+            table.RemoveRange(entitiesToDelete);
+            return count;
         }
     }
 }

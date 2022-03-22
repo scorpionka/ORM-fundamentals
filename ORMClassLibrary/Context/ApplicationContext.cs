@@ -9,7 +9,7 @@ namespace ORMClassLibrary.Context
         public DbSet<Order> Orders { get; set; } = null!;
         public ApplicationContext()
         {
-            Database.EnsureDeleted(); //to delete the database
+            //Database.EnsureDeleted(); //to delete the database
             Database.EnsureCreated();
         }
 
