@@ -60,19 +60,22 @@ namespace ORMConsoleApp
                 OrderStatus = OrderStatus.InProgress,
                 CreatedDate = new DateTime(2022, 1, 2),
                 UpdatedDate = new DateTime(2022, 1, 3),
-                ProductId = 1
+                ProductId = 1,
             };
             Order order2 = new Order
             {
                 OrderStatus = OrderStatus.Done,
                 CreatedDate = new DateTime(2022, 2, 14),
                 UpdatedDate = new DateTime(2022, 3, 13),
-                ProductId = 2
+                ProductId = 2,
             };
 
             orderRepository.Insert(order1);
             orderRepository.Insert(order2);
             orderRepository.Save();
+
+            var product = productRepository.GetById(1);
+            var order = orderRepository.GetById(2);
 
             //update product
             product1.Name = "Dell";
@@ -99,7 +102,7 @@ namespace ORMConsoleApp
             productRepository.Save();
 
             //delete order
-            orderRepository.Delete(order2.Id);
+            orderRepository.Delete(order1.Id);
             orderRepository.Save();
 
             //get all products

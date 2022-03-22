@@ -10,5 +10,6 @@ namespace ORM.Domain.Models
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public int ProductId { get; set; }
+        public Product Product { get; set; }
     }
 }
